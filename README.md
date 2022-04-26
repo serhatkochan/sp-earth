@@ -1,6 +1,6 @@
 # sp-earth
 
-# Getting Started
+## Getting Started
 
 ## Add your files
 Add files using the command line
@@ -28,7 +28,7 @@ You may also see any lint errors in the console.
 
 ***
 ## Description
-Using React, Ant Design, Axios, React Router Dom, React Redux, Local Storage
+Using React, React Intl, Ant Design, Axios, React Router Dom, React Redux, Local Storage
 
 ## Authors
 Serhat Koçhan

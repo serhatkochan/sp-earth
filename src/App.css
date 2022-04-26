@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+@import "~antd/dist/antd.css";
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #f0f2f5;
+}
+.light-theme header {
+  background-color: #fff;
+  border-color: #c9d5e8;
+  padding: 0 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header {
+  height: 9.178vh;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  flex-wrap: nowrap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo {
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+}
+.leftContent {
+  float: left;
+}
+.leftContent * {
+  display: inline-block;
+}
+.header-menu * {
+  border: none;
+  text-decoration: none;
+  box-shadow: none;
+  margin-right: 4px;
+}
+.rightContent {
+  float: right;
+  height: 31px;
+}
+.rightContent * {
+  margin: 0 3px 0 0;
+  display: inline-block;
+}
+.avatar-user-name {
+  padding-right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+.avatar-image {
+  border: 3px solid black;
+  padding: 3px;
+}
+.header-avatar-dropdown {
+  cursor: pointer;
+}
+.header-language-selection {
+  position: relative;
+  margin-left: 1rem;
+  cursor: pointer;
+  padding-left: 1rem;
+  box-sizing: border-box;
+}
+.header-language-selection::after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: 25%;
+  height: 50%;
+  border-left: 1px solid #dee9f2;
+}
+.site-layout-pages-content {
+  margin: 0px 1.5rem;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 1px solid transparent;
+  min-height: 78vh;
 }
-
-.App-link {
-  color: #61dafb;
+.site-layout-pages-breadcrumb {
+  margin: 0.5rem 2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(6px + 2vmin);
+  border-bottom: 1px solid transparent;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
