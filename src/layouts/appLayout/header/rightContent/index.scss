@@ -1,0 +1,15 @@
+.rightContent {
+  float: right;
+  height: 31px;
+
+  .avatar-user-name {
+    padding-right: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  * {
+    margin: 0 5px 0 0;
+    display: inline-block;
+  }
+}

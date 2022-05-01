@@ -1,0 +1,24 @@
+.carousel-item-02 {
+  .carousel-item {
+    background-image: linear-gradient(
+                    rgb(240, 255, 255) 11%,
+                    rgba(240, 240, 240, 0.7)
+    );
+    border-left: solid 20px rgb(250, 255, 255);
+    border-right: solid 20px rgb(250, 255, 255);
+  }
+
+  .carousel-text {
+    color: rgb(76, 76, 92);
+
+    .carousel-divider {
+      border-color: rgb(76, 76, 92);
+    }
+
+    .carousel-title-divider {
+      background-color: rgb(76, 76, 92);
+      border-color: rgb(76, 76, 92);
+    }
+  }
+
+}

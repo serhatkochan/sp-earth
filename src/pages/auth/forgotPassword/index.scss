@@ -1,0 +1,42 @@
+.forgot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+
+  .mahrek-logo-wrapper {
+    margin-bottom: 30px;
+    width: 12.552vw;
+  }
+
+  .form-wrapper {
+    width: 60%;
+  }
+
+  .form-title {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .btn-forgot {
+    width: 100%;
+    background-color: #006de0;
+    border-radius: 4px;
+    color: white;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-forgot:hover {
+    background-color: white;
+    color: #006de0;
+  }
+
+  .btn-login {
+    text-align: center;
+  }
+}

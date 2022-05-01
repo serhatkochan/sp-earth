@@ -1,0 +1,68 @@
+.slick-dots {
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-item {
+  background-image: linear-gradient(
+                  rgb(31, 109, 223) 11%,
+                  rgba(28, 122, 212, 0.7)
+  );
+  border-right: solid 20px rgba(255, 255, 255, 0.5);
+  border-left: solid 20px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  height: 100vh;
+
+  img {
+    margin-top: 5px;
+    height: 60vh;
+    white-space: nowrap;
+  }
+
+  .carousel-text {
+    text-align: left;
+    padding: 20px 40px;
+    display: block;
+    font-weight: bold;
+    color: white;
+
+    .carousel-text-number {
+      font-size: calc(2vw + 2vh + 0.5vmin);
+      letter-spacing: 1.2px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .carousel-divider {
+      border: solid 1px #fff;
+      height: 1px;
+      width: 40px;
+      position: absolute;
+      left: -60px;
+    }
+
+    .carousel-text-title {
+      font-size: calc(0.9vw + 0.9vh + 0.459vmin);
+      letter-spacing: 0.6px;
+      max-width: 50vh;
+      white-space: pre-wrap;
+    }
+
+    .carousel-title-divider {
+      background-color: #fff;
+      border: solid 1px #fff;
+      height: 1px;
+      margin: 10px 0;
+      width: 40vh;
+    }
+
+    .carousel-text-description {
+      font-size: calc(0.5vw + 0.4vh + 0.5vmin);
+      letter-spacing: 0.4px;
+      max-width: 85vh;
+      white-space: pre-wrap;
+    }
+  }
+}
+

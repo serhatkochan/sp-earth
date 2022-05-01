@@ -27,8 +27,25 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ***
-## Description
-Using React, React Intl, Ant Design, Axios, React Router Dom, React Redux, Local Storage
+## Dependencies
+"react": "^18.0.0", \
+"react-dom": "^18.0.0", \
+"react-scripts": "5.0.1", \
+"redux": "^4.1.2", \
+"react-redux": "^7.2.6", \
+"redux-devtools-extension": "^2.13.9", \
+"react-router-dom": "^6.3.0", \
+"i18next": "^21.6.16", \
+"axios": "^0.26.1", \
+"antd": "^4.19.5", \
+"antd-mask-input": "^2.0.7", \
+"classnames": "^2.3.1", \
+"react-i18next": "^11.16.7", \
+"react-slick": "^0.29.0", \
+"slick-carousel": "^1.8.1", 
+
+
+
 
 ## Authors
 Serhat Koçhan

@@ -1,0 +1,16 @@
+.header-language-selection {
+  position: relative;
+  margin-left: 1rem;
+  cursor: pointer;
+  padding-left: 1rem;
+  box-sizing: border-box;
+
+  ::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 50%;
+    border-left: 1px solid #dee9f2;
+  }
+}
