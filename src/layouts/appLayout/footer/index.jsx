@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ApiVersion } from 'config/api';
+import { ApiVersion } from 'config/app';
 
 const Footer = () => {
   const { t } = useTranslation();

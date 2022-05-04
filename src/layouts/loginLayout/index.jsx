@@ -4,7 +4,7 @@ import Language from './language';
 import Carousel from './carousel';
 import { Outlet } from 'react-router-dom';
 
-import { ApiVersion } from 'config/api';
+import { ApiVersion } from 'config/app';
 
 const LoginLayout = () => {
   return (

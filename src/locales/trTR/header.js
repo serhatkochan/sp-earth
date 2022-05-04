@@ -5,6 +5,7 @@ const header = {
   'student.list': 'Öğrenci Listesi',
   'student.add': 'Öğrenci Ekle',
   'student.details': 'Öğrenci Detayları',
+  'change.password': 'Şifre Değiştir',
   logout: 'Oturumu Kapat',
   language: 'TR',
   turkish: 'Türkçe',

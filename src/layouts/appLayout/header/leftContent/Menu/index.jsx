@@ -11,12 +11,12 @@ const Menu = () => {
   const menuData = (
     <AntMenu>
       <SubMenu key={'students'} title={t('student.list')}>
-        <Link to={'/students'}>
-          <AntMenu.Item key={'studentsList'}>{t('student.list')}</AntMenu.Item>
-        </Link>
-        <Link to={'/students/add'}>
-          <AntMenu.Item key={'studentsAdd'}>{t('student.add')}</AntMenu.Item>
-        </Link>
+        <AntMenu.Item key={'studentsList'}>
+          <Link to={'/students'}>{t('student.list')}</Link>
+        </AntMenu.Item>
+        <AntMenu.Item key={'studentsAdd'}>
+          <Link to={'/students/add'}>{t('student.add')}</Link>
+        </AntMenu.Item>
       </SubMenu>
     </AntMenu>
   );
