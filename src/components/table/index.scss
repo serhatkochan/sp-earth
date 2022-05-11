@@ -1,0 +1,349 @@
+$tablePadding: 18px;
+$Montserrat: 'Montserrat', sans-serif;
+
+// colors
+$dark: rgb(29, 29, 29);
+$light: #fff;
+$primary: rgb(162, 162, 246);
+$bg: #f8f8f8;
+$body: #d6d6d6;
+$menu: #2e353c;
+$menutext: #2e353c;
+
+$primaryColor: #2e353c;
+$danger: #ce0000;
+$warning: #ebd739;
+$info: #0f5bb4;
+
+// spacing
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+// border radius
+$borderRadius: 7px;
+
+// header height
+$headerHeight: 100px;
+
+@mixin breakpoint($point) {
+  @if $point == md {
+    // 768px
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+}
+
+.tableWrapper {
+  border-radius: $borderRadius;
+  .ant-table-pagination{
+    margin-right: 3rem;
+  }
+
+  .ant-pagination-simple-pager {
+    span::after {
+      content: 'of';
+      margin-left: 0;
+      visibility: visible;
+    }
+  }
+
+  .tableFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $borderRadius;
+
+
+    .tableFilterMemory {
+      width: 200px;
+      padding: 12px $tablePadding;
+      border-top-right-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+
+
+      ul {
+        margin-top: 24px;
+        li {
+          display: flex;
+          padding: 3px 5px;
+          font-size: 16px;
+          cursor: pointer;
+
+          svg {
+            margin-right: 5px;
+            margin-top: 2px;
+          }
+        }
+      }
+    }
+
+    .tableFilterItems {
+      display: flex;
+      padding: 15px 0 0 $tablePadding;
+      width: 100%;
+      font-size: 16px;
+
+      .filterList {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .filterListItem {
+          margin-right: 10px;
+          width: 100%;
+
+          &.ant-col-3 {
+            max-width: 13.5%;
+            flex: 0 0 13.5%;
+          }
+
+          .inputLabel {
+            margin-bottom: 10px;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .filterTriggerButton {
+        display: flex;
+        align-items: flex-start;
+        margin-left: 10px;
+        padding-top: 34px;
+        width: 10%;
+
+        button {
+          font-size: 17px;
+          font-weight: bold;
+          padding: 0 29px;
+        }
+      }
+
+
+
+      &.noFilterMemory {
+        padding-top: 30px;
+      }
+    }
+  }
+
+  .tableHead {
+    padding: $tablePadding $tablePadding 0 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .tableHeadTitle {
+      font-weight: bold;
+      font-size: 22px;
+
+    }
+
+    .tableHeadRight {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 8px;
+    }
+  }
+
+  .tableBottom {
+    padding: $tablePadding;
+  }
+
+  .ant-table {
+    border-radius: 0;
+
+    .ant-table-thead {
+      tr {
+        th {
+          &:first-child {
+            padding-left: $tablePadding;
+          }
+        }
+      }
+
+      & > tr > th {
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
+        background-color: transparent;
+
+        &:before {
+          display: none !important;
+        }
+      }
+    }
+
+    .ant-table-tbody {
+      &  > tr > td {
+        border: none;
+      }
+
+      .ant-table-row-selected {
+        & tr:nth-child(odd)  {
+        }
+
+        & tr:nth-child(even)  {
+        }
+
+        td {
+          background: transparent;
+        }
+      }
+
+      .ant-table-placeholder {
+        background: transparent !important;
+      }
+
+      td.ant-table-column-sort {
+        background: transparent;
+      }
+
+      td.ant-table-cell-row-hover {
+        background: #f8f8f8;
+      }
+
+      & tr:nth-child(odd)  {
+      }
+
+      .ant-table-cell {
+        padding: 6px 16px;
+        font-size: 12px;
+      }
+
+      .tableActions {
+        display: flex;
+        justify-items: flex-end;
+
+        .tableCustomActions {
+          display: flex;
+        }
+
+        .tableActionItem {
+          margin-right: 5px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          .iconWrapper {
+            cursor: pointer;
+          }
+
+          svg {
+            cursor: pointer;
+            width: 15px;
+          }
+        }
+      }
+
+      tr.highDanger, tr.danger  {
+
+        .tableActions {
+          .tableActionItem {
+            svg {
+          }
+        }
+      }
+
+      .caseTableSquare {
+        display: flex;
+        justify-content: flex-start;
+
+        .caseTableSquareItem {
+          margin-right: 5px;
+          width: 14px;
+          height: 14px;
+          border-radius: 3px;
+          border: solid 1px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+
+        &.highDanger {
+          .caseTableSquareItem {
+          }
+        }
+
+        &.danger {
+          .caseTableSquareItem {
+          }
+        }
+
+        &.critical {
+          .caseTableSquareItem {
+          }
+        }
+
+        &.high {
+          .caseTableSquareItem {
+          }
+        }
+      }
+    }
+  }
+}
+.ant-modal-content {
+  border-radius: $borderRadius;
+  .ant-modal-body {
+    .ant-modal-confirm-body {
+
+      .confirmModalIcon {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 10px;
+      }
+
+      .confirmModalRecordText {
+        font-weight: bold;
+      }
+
+      .ant-modal-confirm-title {
+        display: inline-flex;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .ant-modal-confirm-content {
+        font-size: 17px;
+      }
+    }
+
+    .ant-modal-confirm-btns {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      float: none;
+    }
+  }
+}
+
+.humanInfoList {
+  .humanInfoColumn {
+    padding: 0 20px !important;
+
+    &:last-child {
+      background-image: none;
+    }
+
+    .humanInfoItem {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .humanInfoItemLabel {
+        font-weight: bold;
+      }
+
+      .humanInfoItemValue {
+
+      }
+    }
+  }
+}}

@@ -14,7 +14,7 @@ body {
   position: fixed;
   right: 0;
   bottom: 10px;
-  left: 20px;
+  left: 50px;
 }
 .version {
   position: fixed;
@@ -25,13 +25,13 @@ body {
 .site-layout-pages-content {
   margin: 0 1.5rem;
   background-color: #fff;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /*align-items: center;*/
+  /*justify-content: center;*/
   font-size: calc(10px + 2vmin);
   border-bottom: 1px solid transparent;
-  min-height: 78vh;
 }
 .site-layout-pages-breadcrumb {
   margin: 0.5rem 2rem 0 2rem;

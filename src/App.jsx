@@ -8,11 +8,8 @@ import 'services/i18n';
 
 //pages
 import TrackingMap from 'pages/trackingMap';
-import StudentList from 'pages/student/StudentList';
-import StudentAdd from 'pages/student/StudentAdd';
-import StudentDetails from 'pages/student/StudentDetails';
-import Login from 'pages/auth/login';
-import ForgotPassword from 'pages/auth/forgotPassword';
+import { StudentList, StudentAdd } from 'pages/student';
+import { Login, ForgotPassword } from 'pages/auth';
 
 export default function App() {
   const [loading, setLoading] = useState(false);
@@ -24,11 +21,7 @@ export default function App() {
             <Route exact path="/" element={<TrackingMap />} />
             <Route exact path="/students" element={<StudentList />} />
             <Route exact path="/students/add" element={<StudentAdd />} />
-            <Route
-              exact
-              path="/students/:studentId"
-              element={<StudentDetails />}
-            />
+            <Route exact path="/students/:studentId" element={<StudentAdd />} />
           </Route>
           <Route exact path="/login" element={<NonAuthRoute />}>
             <Route exact path="/login" element={<Login />} />
