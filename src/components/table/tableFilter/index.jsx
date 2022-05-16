@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col } from 'antd';
+import { Col, Form } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import mapValues from 'lodash/mapValues';
@@ -15,13 +15,17 @@ import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 const TableFilter = ({
   filteredColumns,
   setFilter,
+  triggerProvinceChange,
   initialFilter,
   filterMemory = true,
   triggerType = 'button',
+  searchForm,
+  setFilterData,
 }) => {
   const [filters, setFilters] = useState({});
   const { t } = useTranslation();
 
+  // initialFilter set search filter
   useEffect(() => {
     if (initialFilter) {
       setFilters(initialFilter);
@@ -52,9 +56,10 @@ const TableFilter = ({
             <FilterDropdown
               placeholder={filterPlaceHolder}
               filterProps={column.filter}
-              onSelect={(value) =>
-                handleChangeInput(value, column.title, filterItemKey)
-              }
+              onSelect={(value) => {
+                handleChangeInput(value, column.title, filterItemKey);
+                triggerProvinceChange(value);
+              }}
               value={
                 filterItem?.mode === 'multiple' && filterItemValue === null
                   ? []
@@ -87,6 +92,8 @@ const TableFilter = ({
                 handleChangeInput(query, column.title, filterItemKey)
               }
               value={filterItemValue}
+              type={column.filter?.type}
+              mask={column.filter?.mask}
             />
           );
       }
@@ -125,6 +132,8 @@ const TableFilter = ({
     setFilters({});
     setFilter({});
     triggerFilterChange({});
+    searchForm.resetFields();
+    setFilterData(null);
   };
 
   return (
@@ -135,7 +144,11 @@ const TableFilter = ({
           noFilterMemory: !filterMemory,
         })}
       >
-        <div className="filterList">{getFilters()}</div>
+        <div className="filterList">
+          <Form layout={'inline'} form={searchForm} initialValues={null}>
+            {getFilters()}
+          </Form>
+        </div>
       </div>
       <div className="tableFilterMemory">
         <ul>

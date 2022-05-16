@@ -3,6 +3,7 @@ export default {
   map: 'HARİTA',
   management: 'YÖNETİM',
   students: 'Öğrenciler',
+  student: 'Öğrenci',
   'student.list': 'Öğrenci Listesi',
   'student.add': 'Öğrenci Ekle',
   'student.details': 'Öğrenci Detayları',
@@ -42,4 +43,7 @@ export default {
   'district.name': ' İlçe Adı',
   active: 'Aktif',
   passive: 'Pasif',
+  'students.listed': 'Öğrenci Listeleniyor',
+  total: 'Toplam',
+  'account.settings': 'Hesap Ayarları',
 };

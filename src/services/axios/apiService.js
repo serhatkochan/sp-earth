@@ -28,9 +28,9 @@ class ApiService {
   };
   setToken = () => {
     this.service.interceptors.request.use((config) => {
-      const token = GetAuthInfo();
+      const token = GetAuthInfo()?.jwt;
       if (IsLogin() && token) {
-        config.headers.Authorization = 'bearer ' + token;
+        config.headers.Authorization = 'Bearer ' + token;
       } else {
         LogoutAuth();
       }

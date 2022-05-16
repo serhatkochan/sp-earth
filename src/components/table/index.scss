@@ -53,20 +53,20 @@ $headerHeight: 100px;
     align-items: center;
     justify-content: center;
     border-radius: $borderRadius;
+    margin-bottom: 4px;
 
 
     .tableFilterMemory {
       width: 200px;
-      padding: 12px $tablePadding;
+      padding: 0 0 0 40px;
       border-top-right-radius: $borderRadius;
       border-bottom-right-radius: $borderRadius;
 
 
       ul {
-        margin-top: 24px;
+        margin-top: 30px;
         li {
           display: flex;
-          padding: 3px 5px;
           font-size: 16px;
           cursor: pointer;
 
@@ -80,7 +80,7 @@ $headerHeight: 100px;
 
     .tableFilterItems {
       display: flex;
-      padding: 15px 0 0 $tablePadding;
+      padding: 0px 0 0 20px;
       width: 100%;
       font-size: 16px;
 
@@ -166,7 +166,6 @@ $headerHeight: 100px;
 
       & > tr > th {
         border: none;
-        font-weight: bold;
         font-size: 14px;
         background-color: transparent;
 

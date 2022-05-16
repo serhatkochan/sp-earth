@@ -3,6 +3,7 @@ export default {
   map: 'MAP',
   management: 'MANAGEMENT',
   students: 'Students',
+  student: 'Student',
   'student.list': 'Student List',
   'student.add': 'Student Add',
   'student.details': 'Student Details',
@@ -42,4 +43,7 @@ export default {
   'district.name': 'District Name',
   active: 'Active',
   passive: 'Passive',
+  total: 'Total',
+  'students.listed': 'Students Listed',
+  'account.settings': 'Account Settings',
 };

@@ -3,7 +3,7 @@ import debounce from 'lodash/debounce';
 import PropTypes from 'prop-types';
 import Input from 'components/input';
 
-const FilterText = ({ onChange, placeholder, value }) => {
+const FilterText = ({ onChange, placeholder, value, type, mask }) => {
   const [filterValue, setFilterValue] = useState(null);
 
   useEffect(() => {
@@ -33,6 +33,8 @@ const FilterText = ({ onChange, placeholder, value }) => {
       value={filterValue}
       onChange={handleChange}
       theme="dark"
+      type={type ? type : 'text'}
+      mask={mask ? mask : ''}
     />
   );
 };
@@ -41,6 +43,8 @@ FilterText.propTypes = {
   value: PropTypes.any,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
+  type: PropTypes.any,
+  mask: PropTypes.any,
 };
 
 export default FilterText;

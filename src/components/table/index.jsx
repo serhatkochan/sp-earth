@@ -18,23 +18,26 @@ const Table = ({
   data,
   columns,
   head,
-  filterMemory,
   loading = false,
   rowSelection,
   pagination = false,
   actions,
   rowClassName,
-  onFilterChange,
+  triggerFilterButton,
+  triggerProvinceChange,
   filterTriggerType = 'button',
+  filterMemory,
   initialFilter,
+  searchForm,
+  setFilterData,
 }) => {
   const { t } = useTranslation();
   const filteredColumns = columns?.filter((item) => item.filter);
   const [filter, setFilter] = useState({});
 
   useEffect(() => {
-    if (onFilterChange) {
-      onFilterChange(filter);
+    if (triggerFilterButton) {
+      triggerFilterButton(filter);
     }
   }, [filter]);
 
@@ -124,9 +127,12 @@ const Table = ({
     <div className="tableWrapper">
       {filteredColumns.length > 0 && (
         <TableFilter
+          searchForm={searchForm}
           filterMemory={filterMemory}
           filteredColumns={filteredColumns}
           setFilter={setFilter}
+          setFilterData={setFilterData}
+          triggerProvinceChange={triggerProvinceChange}
           triggerType={filterTriggerType}
           initialFilter={initialFilter}
         />

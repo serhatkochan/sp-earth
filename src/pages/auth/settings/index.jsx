@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,53 +7,36 @@ import { Input, Dropdown, Checkbox, Button } from 'components';
 import './index.scss';
 import ProvinceService from 'services/axios/provinceService';
 import StudentService from 'services/axios/studentService';
+import { SetAuthInfo } from 'utils/authHelper';
 const { Content } = Layout;
 
-export default function StudentAdd() {
-  let { studentId } = useParams();
+export default function StudentSettings() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [provinceData, setProvinceData] = useState([]);
   const [districtData, setDistrictData] = useState([]);
-  const roleData = [
-    { value: 'Admin', role: 'Admin' },
-    { value: 'User', role: 'User' },
-  ];
   const phoneMask = '(000) 000 00 00';
   const fetchStudentPending = false;
 
-  const onSaveStudent = (values) => {
-    try {
-      StudentService.addStudent(values).then((res) => {
-        if (res.data.success) {
-          navigate('/students');
-        } else {
-          console.log(res.data.message);
-        }
-      });
-    } catch (ex) {
-      console.log('Bilinmeyen Bir Hata Oluştu!');
-    }
-  };
   const onChangeStudent = (values) => {
     try {
-      StudentService.updateStudent(studentId, values).then((res) => {
-        if (res.data.success) {
-          navigate('/students');
-        } else {
-          console.log(res.data.message);
+      StudentService.updateStudent(selectedStudent.studentId, values).then(
+        (res) => {
+          if (res.data.success) {
+            SetAuthInfo(res.data.data);
+            navigate('/students');
+          } else {
+            console.log(res.data.message);
+          }
         }
-      });
+      );
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');
     }
   };
 
-  const triggerDeleteStudent = () => {
-    console.log('hi');
-  };
   const triggerResetForm = () => {
     form.resetFields();
     form.setFieldsValue({
@@ -85,19 +67,15 @@ export default function StudentAdd() {
   }, []);
 
   useEffect(() => {
-    if (studentId) {
-      try {
-        StudentService.findByStudentId(studentId).then((res) => {
-          setSelectedStudent(res.data.data);
-          form.setFieldsValue(res.data.data);
-        });
-      } catch (ex) {
-        console.log('Bilinmeyen Bir Hata Oluştu!');
-      }
-    } else {
-      triggerResetForm();
+    try {
+      StudentService.currentStudent().then((res) => {
+        setSelectedStudent(res.data.data);
+        form.setFieldsValue(res.data.data);
+      });
+    } catch (ex) {
+      console.log('Bilinmeyen Bir Hata Oluştu!');
     }
-  }, [studentId]);
+  }, []);
 
   useEffect(() => {
     if (selectedStudent) {
@@ -109,16 +87,13 @@ export default function StudentAdd() {
   return (
     <div>
       <div className="site-layout-pages-breadcrumb">
-        {studentId ? t('student.edit') : t('student.add')}
+        {t('account.settings')}
       </div>
       <div>
         <Row>
           <Content className="site-layout-pages-content">
             <div className="form-row">
-              <Form
-                onFinish={studentId ? onChangeStudent : onSaveStudent}
-                form={form}
-              >
+              <Form onFinish={onChangeStudent} form={form}>
                 <Row>
                   <Col span={11} className={'form-col'}>
                     <div>
@@ -160,16 +135,15 @@ export default function StudentAdd() {
                           },
                         ]}
                       />
-                      <Dropdown
-                        label={t('role')}
-                        name="role"
-                        displayLabel="role"
-                        displayValue="role"
-                        options={roleData}
+                      <Input
+                        label={t('password')}
+                        name="password"
+                        placeholder={t('password')}
+                        type="password"
                         rules={[
                           {
                             required: true,
-                            message: t('role.is.required'),
+                            message: t('please.enter.password'),
                           },
                         ]}
                       />
@@ -234,12 +208,6 @@ export default function StudentAdd() {
                   </Col>
                 </Row>
                 <div className="formButtons">
-                  <Button
-                    text={t('delete')}
-                    loading={false}
-                    className="small"
-                    onClick={triggerDeleteStudent}
-                  />
                   <Button
                     text={t('reset')}
                     loading={false}

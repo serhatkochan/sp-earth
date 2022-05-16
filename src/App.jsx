@@ -10,6 +10,7 @@ import 'services/i18n';
 import TrackingMap from 'pages/trackingMap';
 import { StudentList, StudentAdd } from 'pages/student';
 import { Login, ForgotPassword } from 'pages/auth';
+import StudentSettings from './pages/auth/settings';
 
 export default function App() {
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,11 @@ export default function App() {
             <Route exact path="/students" element={<StudentList />} />
             <Route exact path="/students/add" element={<StudentAdd />} />
             <Route exact path="/students/:studentId" element={<StudentAdd />} />
+            <Route
+              exact
+              path="student/settings"
+              element={<StudentSettings />}
+            />
           </Route>
           <Route exact path="/login" element={<NonAuthRoute />}>
             <Route exact path="/login" element={<Login />} />

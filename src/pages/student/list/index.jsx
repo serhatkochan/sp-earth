@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Table from 'components/table';
 
-import { getTableDate, dateDifferenceAsDay } from 'utils/dateHelper';
-
 import StudentService from 'services/axios/studentService';
+import ProvinceService from 'services/axios/provinceService';
+
 import './index.scss';
-import { Layout, Tag } from 'antd';
+import { Form, Layout, Tag } from 'antd';
 
 const { Content } = Layout;
 
@@ -18,10 +16,15 @@ const StudentList = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [studentData, setStudentData] = useState(null);
+  const [filterData, setFilterData] = useState(null);
+  const [provinceData, setProvinceData] = useState([]);
+  const [districtData, setDistrictData] = useState([]);
+  const [form] = Form.useForm();
+  const phoneMask = '(000) 000 00 00';
 
   const getAllStudent = () => {
     try {
-      StudentService.get().then((res) => {
+      StudentService.getAllStudents().then((res) => {
         if (res.data.success) {
           setStudentData(res.data.data);
         } else {
@@ -32,8 +35,41 @@ const StudentList = () => {
       console.log('Bilinmeyen Bir Hata Oluştu!');
     }
   };
+  const getAllProvinceList = () => {
+    try {
+      ProvinceService.getAllProvinceList().then((res) => {
+        if (res.data.success) {
+          setProvinceData(res.data.data);
+        } else {
+          console.log(res.data.message);
+        }
+      });
+    } catch (ex) {
+      console.log('Bilinmeyen Bir Hata Oluştu!');
+    }
+  };
+  const triggerFilterButton = (filters) => {
+    try {
+      if (Object.keys(filters).length > 0) {
+        StudentService.findByFilters(filters).then((res) => {
+          if (res.data.success) {
+            setFilterData(res.data.data);
+          } else {
+            console.log(res.data.message);
+          }
+          console.log(res);
+        });
+      }
+    } catch (ex) {
+      console.log('Bilinmeyen Bir Hata Oluştu!');
+    }
+  };
+  const triggerProvinceChange = (value) => {
+    setDistrictData(provinceData[value - 1]?.districts);
+  };
   useEffect(() => {
     getAllStudent();
+    getAllProvinceList();
   }, []);
 
   const columns = [
@@ -49,49 +85,63 @@ const StudentList = () => {
       title: t('first.name'),
       dataIndex: 'firstName',
       key: 'firstName',
+      sorter: (a, b) => a.firstName.length - b.firstName.length,
       filter: true,
     },
     {
       title: t('last.name'),
       dataIndex: 'lastName',
       key: 'lastName',
+      sorter: (a, b) => a.lastName.length - b.lastName.length,
       filter: true,
     },
     {
       title: t('phone.number'),
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
-      filter: true,
+      filter: {
+        type: 'masked',
+        mask: phoneMask,
+      },
     },
     {
       title: t('province.name'),
       dataIndex: 'provinceName',
       key: 'provinceNo',
+      sorter: (a, b) => a.provinceName.length - b.provinceName.length,
       filter: {
         type: 'dropdown',
-        options: studentData,
+        options: provinceData,
         label: 'provinceName',
-        value: 'provinceName',
-        render: (option) => t(option.text),
+        value: 'provinceNo',
+        render: (option) => t(option.provinceName),
       },
     },
     {
       title: t('district.name'),
       dataIndex: 'districtName',
-      key: 'districtName',
+      key: 'districtId',
+      sorter: (a, b) => a.districtName.length - b.districtName.length,
       filter: {
         type: 'dropdown',
-        options: studentData,
+        options: districtData,
         label: 'districtName',
-        value: 'districtName',
-        render: (option) => t(option.text),
+        value: 'districtId',
+        render: (option) => t(option.districtName),
       },
     },
     {
       title: t('email'),
       dataIndex: 'email',
       key: 'email',
+      sorter: (a, b) => a.email.length - b.email.length,
       filter: true,
+    },
+    {
+      title: t('role'),
+      dataIndex: 'role',
+      key: 'role',
+      sorter: (a, b) => a.role.length - b.role.length,
     },
     {
       title: t('active'),
@@ -144,28 +194,26 @@ const StudentList = () => {
 
   return (
     <div>
-      <div className="site-layout-pages-breadcrumb">Student List</div>
+      <div className="site-layout-pages-breadcrumb">{t('student.list')}</div>
       <Content className="site-layout-pages-content">
         <Table
-          data={studentData}
-          head={{
-            pageTitle: t('tracking_records'),
-            renderRight: () => {
-              return <div>sdasd</div>;
-            },
-          }}
+          searchForm={form}
+          data={filterData ? filterData : studentData}
           actions={actionConfig()}
           loading={false}
           columns={columns}
-          onFilterChange={null}
+          triggerFilterButton={triggerFilterButton}
+          triggerProvinceChange={triggerProvinceChange}
+          setFilterData={setFilterData}
           pagination={{
             defaultCurrent: 1,
             pageSize: 7,
-            total: studentData?.length,
+            total: filterData ? filterData.length : studentData?.length,
             showTotal: (total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`,
+              `${range[0]}-${range[1]} ${t('students.listed')}. ${t(
+                'total'
+              )} ${total} ${t('student')} `,
           }}
-          defaultPageSize={5}
         />
       </Content>
     </div>

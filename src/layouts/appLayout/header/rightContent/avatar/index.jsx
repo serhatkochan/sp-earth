@@ -6,27 +6,33 @@ import { useDispatch } from 'react-redux';
 import './index.scss';
 import UserService from 'services/axios/userService';
 import { LogoutAuth } from 'utils/authHelper';
-import { setCurrentUser } from '../../../../../store/actions/currentUserActions';
+import { setCurrentUser } from 'store/actions/currentUserActions';
 
 const Avatar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const logout = () => {
-    LogoutAuth();
-    dispatch(setCurrentUser(null));
+    try {
+      UserService.logout().then((res) => {
+        if (res.data.success) {
+          LogoutAuth();
+          dispatch(setCurrentUser(null));
+        } else {
+          console.log('Bilinmeyen Bir Hata Oluştu!');
+        }
+      });
+    } catch (ex) {
+      console.log('Bilinmeyen Bir Hata Oluştu!');
+    }
   };
-  const changePassword = () => {
-    console.log('changePassword');
-  };
-
   const menuData = (
     <AntMenu
       key="avatarMenu"
       style={{ margin: '-30px 30px 0 0 ', cursor: 'pointer' }}
     >
-      <AntMenu.Item key={'changePassword'} onClick={changePassword}>
-        {t('change.password')}
+      <AntMenu.Item key={'settings'}>
+        <Link to={'/student/settings'}>{t('settings')}</Link>
       </AntMenu.Item>
       <AntMenu.Item key={'logout'} onClick={logout}>
         {t('logout')}

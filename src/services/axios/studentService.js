@@ -1,8 +1,11 @@
 import ApiService from './apiService';
 
 class StudentService {
-  get() {
+  getAllStudents() {
     return ApiService.get('api/students');
+  }
+  findByFilters(filters) {
+    return ApiService.post('api/students/findByFilters', { ...filters });
   }
   findByStudentId(studentId) {
     return ApiService.get('api/students/findByStudenId?studentId=' + studentId);
@@ -19,6 +22,9 @@ class StudentService {
     return ApiService.put('api/students/updateStudent?studentId=' + studentId, {
       ...body,
     });
+  }
+  currentStudent() {
+    return ApiService.get('api/students/currentStudent');
   }
 }
 

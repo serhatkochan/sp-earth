@@ -21,21 +21,9 @@ export const FilterDropdown = ({
     fillDefaultOptions();
   }, [options]);
 
-  const getQuery = async () => {
-    // if (searchUrl) {
-    //     await api.get(searchUrl).then((response) => {
-    //         setDefaultOptions(response.data.docs);
-    //     }).catch(() => {
-    //         setDefaultOptions([]);
-    //     });
-    // }
-  };
-
   const fillDefaultOptions = () => {
     if (options && options.length > 0) {
       setDefaultOptions(options);
-    } else {
-      getQuery();
     }
   };
 
@@ -49,19 +37,11 @@ export const FilterDropdown = ({
           onSelect(value, option.children);
         }
       }}
-      onChange={(value, options) => {
-        if (mode) {
-          if (value.length > 0) {
-            onSelect(value, options.map((option) => option.children).join(','));
-          } else {
-            onSelect(null, null);
-          }
-        }
-      }}
       showSearch={true}
       placeholder={placeholder}
       displayLabel={searchResponseLabel}
       displayValue={searchResponseValue}
+      name={searchResponseValue}
       allowClear={true}
       labelRender={labelRender}
       mode={mode}
