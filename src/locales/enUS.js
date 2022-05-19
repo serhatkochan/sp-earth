@@ -46,4 +46,5 @@ export default {
   total: 'Total',
   'students.listed': 'Students Listed',
   'account.settings': 'Account Settings',
+  'student.map': 'Student Map',
 };

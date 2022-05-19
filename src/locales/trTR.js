@@ -46,4 +46,5 @@ export default {
   'students.listed': 'Öğrenci Listeleniyor',
   total: 'Toplam',
   'account.settings': 'Hesap Ayarları',
+  'student.map': 'Öğrenci Haritası',
 };

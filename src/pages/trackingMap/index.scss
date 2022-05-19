@@ -1,0 +1,17 @@
+.map-content{
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+#info {
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  background: rgba(0,50,100,0.5);
+  color: white;
+  border: 0;
+  transition: opacity 100ms ease-in;
+}
