@@ -30,6 +30,7 @@ const Table = ({
   initialFilter,
   searchForm,
   setFilterData,
+  setExcelFilter,
 }) => {
   const { t } = useTranslation();
   const filteredColumns = columns?.filter((item) => item.filter);
@@ -38,6 +39,7 @@ const Table = ({
   useEffect(() => {
     if (triggerFilterButton) {
       triggerFilterButton(filter);
+      setExcelFilter(filter);
     }
   }, [filter]);
 
@@ -131,6 +133,7 @@ const Table = ({
           filterMemory={filterMemory}
           filteredColumns={filteredColumns}
           setFilter={setFilter}
+          setExcelFilter={setExcelFilter}
           setFilterData={setFilterData}
           triggerProvinceChange={triggerProvinceChange}
           triggerType={filterTriggerType}

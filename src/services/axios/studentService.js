@@ -7,6 +7,9 @@ class StudentService {
   findByFilters(filters) {
     return ApiService.post('api/students/findByFilters', { ...filters });
   }
+  exportToExcel(filters) {
+    return ApiService.post('api/students/exportToExcel', { ...filters });
+  }
   findByStudentId(studentId) {
     return ApiService.get('api/students/findByStudenId?studentId=' + studentId);
   }

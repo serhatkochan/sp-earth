@@ -10,7 +10,12 @@ import FilterText from './FilterText';
 import FilterDatepicker from './FilterDatepicker';
 
 import '../index.scss';
-import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
+import {
+  ClearOutlined,
+  SearchOutlined,
+  DownCircleOutlined,
+  DownSquareOutlined,
+} from '@ant-design/icons';
 
 const TableFilter = ({
   filteredColumns,
@@ -21,6 +26,7 @@ const TableFilter = ({
   triggerType = 'button',
   searchForm,
   setFilterData,
+  setExcelFilter,
 }) => {
   const [filters, setFilters] = useState({});
   const { t } = useTranslation();
@@ -29,12 +35,14 @@ const TableFilter = ({
   useEffect(() => {
     if (initialFilter) {
       setFilters(initialFilter);
+      setExcelFilter(initialFilter);
     }
   }, [initialFilter]);
 
   const triggerFilterChange = (filter) => {
     if (triggerType !== 'button') {
       setFilter(mapValues(filter, 'id'));
+      setExcelFilter(mapValues(filter, 'id'));
     }
   };
 
@@ -60,11 +68,6 @@ const TableFilter = ({
                 handleChangeInput(value, column.title, filterItemKey);
                 triggerProvinceChange(value);
               }}
-              value={
-                filterItem?.mode === 'multiple' && filterItemValue === null
-                  ? []
-                  : filterItemValue
-              }
               labelRender={filterItem?.render}
               mode={filterItem?.mode}
             />
@@ -131,6 +134,7 @@ const TableFilter = ({
   const handleRemoveFilters = () => {
     setFilters({});
     setFilter({});
+    setExcelFilter({});
     triggerFilterChange({});
     searchForm.resetFields();
     setFilterData(null);
@@ -145,7 +149,7 @@ const TableFilter = ({
         })}
       >
         <div className="filterList">
-          <Form layout={'inline'} form={searchForm} initialValues={null}>
+          <Form layout={'inline'} form={searchForm}>
             {getFilters()}
           </Form>
         </div>
@@ -155,6 +159,7 @@ const TableFilter = ({
           <li
             onClick={() => {
               setFilter(mapValues(filters, 'id'));
+              setExcelFilter(mapValues(filters, 'id'));
             }}
           >
             <SearchOutlined /> {t('filter')}
