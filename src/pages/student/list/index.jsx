@@ -64,15 +64,18 @@ const StudentList = () => {
   const triggerFilterButton = (filters) => {
     try {
       if (Object.keys(filters).length > 0) {
+        setStudentPending(true);
         StudentService.findByFilters(filters).then((res) => {
           if (res.data.success) {
             setFilterData(res.data.data);
           } else {
             console.log(res.data.message);
           }
+          setStudentPending(false);
         });
       }
     } catch (ex) {
+      setStudentPending(false);
       console.log('Bilinmeyen Bir Hata Oluştu!');
     }
   };
@@ -99,6 +102,31 @@ const StudentList = () => {
       setStudentPending(false);
     }
   };
+  const triggerExportPdfWithApi = () => {
+    setStudentPending(true);
+    try {
+      StudentService.exportToPdf(excelFilter)
+        .then((response) => {
+          console.log(response);
+          const dirtyFileName = response.headers['content-disposition'];
+          const regex =
+            /filename[^;=\n]*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/;
+          let fileName = dirtyFileName.match(regex)[3];
+
+          let blob = new Blob([response.data]);
+          FileSaver.saveAs(blob, fileName);
+          setStudentPending(false);
+        })
+        .catch((ex) => {
+          console.log(ex);
+          setStudentPending(false);
+        });
+    } catch (ex) {
+      console.log('Bilinmeyen Bir Hata Oluştu!');
+      setStudentPending(false);
+    }
+  };
+
   const columns = [
     {
       title: t('student.no'),
@@ -259,6 +287,12 @@ const StudentList = () => {
             onClick={() => triggerExportExcelWithApi()}
           >
             <DownCircleOutlined /> {t('export.excel.with.api')}
+          </div>
+          <div
+            className="download-icon"
+            onClick={() => triggerExportPdfWithApi()}
+          >
+            <DownCircleOutlined /> {t('export.pdf.with.api')}
           </div>
         </div>
         <Table

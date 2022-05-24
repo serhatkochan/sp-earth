@@ -16,6 +16,15 @@ class StudentService {
       }
     );
   }
+  exportToPdf(filters) {
+    return ApiService.post(
+      'api/students/exportToPdf',
+      { ...filters },
+      {
+        responseType: 'blob',
+      }
+    );
+  }
   findByStudentId(studentId) {
     return ApiService.get('api/students/findByStudenId?studentId=' + studentId);
   }

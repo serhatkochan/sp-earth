@@ -47,7 +47,7 @@ export default {
   'students.listed': 'Students Listed',
   'account.settings': 'Account Settings',
   'student.map': 'Student Map',
-  'export.xlsx.with.react': 'Export Xlsx With React',
-  'export.csv.with.react': 'Export Csv With React',
-  'export.excel.with.api': 'Export Excel With Api',
+  'export.xlsx.with.react': 'Export XLSX With React',
+  'export.csv.with.react': 'Export CSV With React',
+  'export.excel.with.api': 'Export CSV With Api',
 };
