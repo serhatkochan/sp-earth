@@ -4,18 +4,12 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import mapValues from 'lodash/mapValues';
 
-import Button from 'components/button';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';
 import FilterDatepicker from './FilterDatepicker';
 
 import '../index.scss';
-import {
-  ClearOutlined,
-  SearchOutlined,
-  DownCircleOutlined,
-  DownSquareOutlined,
-} from '@ant-design/icons';
+import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 
 const TableFilter = ({
   filteredColumns,

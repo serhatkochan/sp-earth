@@ -47,7 +47,7 @@ export default {
   total: 'Toplam',
   'account.settings': 'Hesap Ayarları',
   'student.map': 'Öğrenci Haritası',
-  'export.xlsx.with.react': 'Export XLSX With React',
-  'export.csv.with.react': 'Export CSV With React',
-  'export.excel.with.api': 'Export EXCEL With Api',
+  'export.xlsx.with.react': 'XLSX Formatında React ile',
+  'export.csv.with.react': 'CSV Formatında React ile',
+  'export.excel.with.api': 'XLS Formatında Api ile',
 };

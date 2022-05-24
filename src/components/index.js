@@ -5,8 +5,10 @@ import Input from './input';
 import Table from './table';
 import DatePicker from './datepicker';
 import Dropdown from './dropdown';
-import Loader from './loader';
 import Checkbox from './checkbox';
+import ExportCSV from './export/exportCSV';
+import ExportXLSX from './export/exportXLSX';
+import Loading from './loading';
 
 export {
   Button,
@@ -16,6 +18,8 @@ export {
   Table,
   DatePicker,
   Dropdown,
-  Loader,
   Checkbox,
+  ExportCSV,
+  ExportXLSX,
+  Loading,
 };

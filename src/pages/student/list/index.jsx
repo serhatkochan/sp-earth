@@ -11,7 +11,7 @@ import ProvinceService from 'services/axios/provinceService';
 import './index.scss';
 import { Form, Layout, Tag } from 'antd';
 import { DownCircleOutlined, DownSquareOutlined } from '@ant-design/icons';
-import fileSaver from 'file-saver/dist/FileSaver';
+import FileSaver from 'file-saver';
 
 const { Content } = Layout;
 
@@ -23,6 +23,7 @@ const StudentList = () => {
   const [provinceData, setProvinceData] = useState([]);
   const [districtData, setDistrictData] = useState([]);
   const [excelFilter, setExcelFilter] = useState({});
+  const [studentPending, setStudentPending] = useState(false);
   const [form] = Form.useForm();
   const phoneMask = '(000) 000 00 00';
 
@@ -32,6 +33,7 @@ const StudentList = () => {
   }, []);
 
   const getAllStudent = () => {
+    setStudentPending(true);
     try {
       StudentService.getAllStudents().then((res) => {
         if (res.data.success) {
@@ -39,9 +41,11 @@ const StudentList = () => {
         } else {
           console.log(res.data.message);
         }
+        setStudentPending(false);
       });
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');
+      setStudentPending(false);
     }
   };
   const getAllProvinceList = () => {
@@ -78,6 +82,7 @@ const StudentList = () => {
   };
 
   const triggerExportExcelWithApi = () => {
+    setStudentPending(true);
     try {
       StudentService.exportToExcel(excelFilter).then((response) => {
         const dirtyFileName = response.headers['content-disposition'];
@@ -86,10 +91,12 @@ const StudentList = () => {
         let fileName = dirtyFileName.match(regex)[3];
 
         let blob = new Blob([response.data]);
-        fileSaver.saveAs(blob, fileName);
+        FileSaver.saveAs(blob, fileName);
+        setStudentPending(false);
       });
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');
+      setStudentPending(false);
     }
   };
   const columns = [
@@ -194,6 +201,7 @@ const StudentList = () => {
     return {
       delete: {
         onClick: (data) => {
+          setStudentPending(true);
           try {
             StudentService.deleteStudent(data.studentId).then((res) => {
               if (res.data.success) {
@@ -201,9 +209,11 @@ const StudentList = () => {
               } else {
                 console.log(res.data.message);
               }
+              setStudentPending(false);
             });
           } catch (ex) {
             console.log('Bilinmeyen Bir Hata Oluştu!');
+            setStudentPending(false);
           }
         },
         confirm: {
@@ -240,35 +250,6 @@ const StudentList = () => {
               csvData={studentData ? studentData : []}
               csvHeaders={columns}
               fileName={'student-data'}
-              wscols={[
-                {
-                  wch: 11,
-                },
-                {
-                  wch: 15,
-                },
-                {
-                  wch: 15,
-                },
-                {
-                  wch: 13,
-                },
-                {
-                  wch: 10,
-                },
-                {
-                  wch: 10,
-                },
-                {
-                  wch: 20,
-                },
-                {
-                  wch: 6,
-                },
-                {
-                  wch: 6,
-                },
-              ]}
               icon={<DownCircleOutlined />}
               text={t('export.xlsx.with.react')}
             />
@@ -284,7 +265,7 @@ const StudentList = () => {
           searchForm={form}
           data={filterData ? filterData : studentData}
           actions={actionConfig()}
-          loading={false}
+          loading={studentPending}
           columns={columns}
           triggerFilterButton={triggerFilterButton}
           triggerProvinceChange={triggerProvinceChange}

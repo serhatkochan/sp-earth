@@ -1,42 +1,50 @@
 import React from 'react';
-import Button from 'components/button';
 import FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import './index.scss';
 
-const ExportXLSX = ({ csvData, csvHeaders, fileName, wscols, icon, text }) => {
+const ExportXLSX = ({ csvData, csvHeaders, fileName, icon, text }) => {
   // ******** XLSX with object key as header *************
-  // const fileType =
-  //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-  // const fileExtension = ".xlsx";
-
-  // const exportToCSV = (csvData, fileName) => {
-  //   const ws = XLSX.utils.json_to_sheet(csvData);
-  //   const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
-  //   const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-  //   const data = new Blob([excelBuffer], { type: fileType });
-  //   FileSaver.saveAs(data, fileName + fileExtension);
-  // };
-
-  // ******** XLSX with new header *************
   const fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   const fileExtension = '.xlsx';
 
+  const exportToCSV = (csvData, csvHeaders, fileName) => {
+    const ws = XLSX.utils.json_to_sheet(csvData);
+    const wsCols = [
+      { wch: 5 },
+      { wch: 12 },
+      { hidden: true },
+      { wch: 24 },
+      { wch: 12 },
+      { wch: 11 },
+      { wch: 12 },
+      { hidden: true },
+      { wch: 15 },
+      { wch: 2 },
+      { wch: 14 },
+      { wch: 6 },
+      { wch: 6 },
+    ];
+    ws['!cols'] = wsCols;
+    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+  };
+  /*
   const heading = [
-    {
-      studentNo: 'Student No',
-      firstName: 'First Name',
-      lastName: 'Last Name',
-      phoneNumber: 'Phone Number',
-      provinceName: 'Province Name',
-      districtName: 'District Name',
-      email: 'email',
-      role: 'role',
-      isActive: 'isActive',
-    },
+    'Student No',
+    'First Name',
+    'Last Name',
+    'Phone Number',
+    'Province Name',
+    'District Name',
+    'Email',
+    'Role',
+    'Is Active',
   ];
-  const exportToCSV = (csvData, csvHeaders, fileName, wscols) => {
+    const exportToCSV = (csvData, csvHeaders, fileName, wscols) => {
     const labels = [
       csvHeaders.map((res) => {
         return res.key;
@@ -53,16 +61,13 @@ const ExportXLSX = ({ csvData, csvHeaders, fileName, wscols, icon, text }) => {
       skipHeader: true,
       origin: -1, //ok
     });
-    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
-    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const data = new Blob([excelBuffer], { type: fileType });
-    FileSaver.saveAs(data, fileName + fileExtension);
   };
+   */
 
   return (
     <div
       className={'button'}
-      onClick={(e) => exportToCSV(csvData, csvHeaders, fileName, wscols)}
+      onClick={(e) => exportToCSV(csvData, csvHeaders, fileName)}
     >
       <span>
         {icon} {text}

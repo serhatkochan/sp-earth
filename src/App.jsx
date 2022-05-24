@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import { ConfigProvider, Spin } from 'antd';
+import { ConfigProvider, Image, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Routes, Route } from 'react-router-dom';
 import { NonAuthRoute, PrivateRoute } from 'config/Route';
@@ -11,12 +11,15 @@ import TrackingMap from 'pages/trackingMap';
 import { StudentList, StudentAdd } from 'pages/student';
 import { Login, ForgotPassword } from 'pages/auth';
 import StudentSettings from './pages/auth/settings';
+import { useSelector } from 'react-redux';
+
+import Loading from 'components/loading';
 
 export default function App() {
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.pending);
   return (
     <ConfigProvider>
-      <Spin spinning={loading} indicator={<LoadingOutlined />}>
+      <Spin spinning={loading} indicator={<Loading />} size="large">
         <Routes>
           <Route exact path="/" element={<PrivateRoute />}>
             <Route exact path="/" element={<TrackingMap />} />

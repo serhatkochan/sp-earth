@@ -8,12 +8,15 @@ import { Input, Dropdown, Checkbox, Button } from 'components';
 import './index.scss';
 import ProvinceService from 'services/axios/provinceService';
 import StudentService from 'services/axios/studentService';
+import { useDispatch } from 'react-redux';
+import { setPending } from '../../../store/actions/pendingActions';
 const { Content } = Layout;
 
 export default function StudentAdd() {
   let { studentId } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [provinceData, setProvinceData] = useState([]);
@@ -26,6 +29,7 @@ export default function StudentAdd() {
   const fetchStudentPending = false;
 
   const onSaveStudent = (values) => {
+    dispatch(setPending(true));
     try {
       StudentService.addStudent(values).then((res) => {
         if (res.data.success) {
@@ -34,11 +38,14 @@ export default function StudentAdd() {
           console.log(res.data.message);
         }
       });
+      dispatch(setPending(false));
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');
+      dispatch(setPending(false));
     }
   };
   const onChangeStudent = (values) => {
+    dispatch(setPending(true));
     try {
       StudentService.updateStudent(studentId, values).then((res) => {
         if (res.data.success) {
@@ -47,8 +54,10 @@ export default function StudentAdd() {
           console.log(res.data.message);
         }
       });
+      dispatch(setPending(false));
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');
+      dispatch(setPending(false));
     }
   };
 
@@ -56,21 +65,26 @@ export default function StudentAdd() {
     console.log('hi');
   };
   const triggerResetForm = () => {
+    dispatch(setPending(true));
     form.resetFields();
     form.setFieldsValue({
       isActive: false,
     });
     setDistrictData([]);
+    dispatch(setPending(false));
   };
   const triggerProvinceChange = (value) => {
+    dispatch(setPending(true));
     setDistrictData(provinceData[value - 1].districts);
     form.setFieldsValue({
       districtId: '',
     });
+    dispatch(setPending(false));
   };
   const triggerDistrictChange = (value) => {};
 
   useEffect(() => {
+    dispatch(setPending(true));
     try {
       ProvinceService.getAllProvinceList().then((res) => {
         if (res.data.success) {
@@ -78,21 +92,26 @@ export default function StudentAdd() {
         } else {
           console.log(res.data.message);
         }
+        dispatch(setPending(false));
       });
     } catch (ex) {
-      console.log(ex);
+      console.log('Bilinmeyen Bir Hata Oluştu!');
+      dispatch(setPending(false));
     }
   }, []);
 
   useEffect(() => {
     if (studentId) {
+      dispatch(setPending(true));
       try {
         StudentService.findByStudentId(studentId).then((res) => {
           setSelectedStudent(res.data.data);
           form.setFieldsValue(res.data.data);
+          dispatch(setPending(false));
         });
       } catch (ex) {
         console.log('Bilinmeyen Bir Hata Oluştu!');
+        dispatch(setPending(false));
       }
     } else {
       triggerResetForm();

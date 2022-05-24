@@ -15,16 +15,17 @@ import {
   CreateHumanIcon,
   UpdateHumanIcon,
 } from 'utils/map/mapFeatureHelper';
-import { ClearSourceLayer, CreateVectorLayer } from 'utils/map/mapLayerHelper';
-import { AreaType, LayerTypes } from 'utils/map/mapConstant';
-import { DrawArea } from 'utils/map/mapAreaHelper';
+import { setPending } from '../../store/actions/pendingActions';
+import { useDispatch } from 'react-redux';
 
 const { Content } = Layout;
 
 const TrackingMap = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setPending(true));
     CreateMap('MAP_0');
     CreateHumanIcon({
       humanId: 1,
@@ -38,6 +39,12 @@ const TrackingMap = () => {
       lon: 35.9226718,
       humanType: 'VICTIM',
     });
+    setTimeout(
+      function () {
+        dispatch(setPending(false));
+      }.bind(this),
+      1200
+    );
   }, []);
   return (
     <div>
