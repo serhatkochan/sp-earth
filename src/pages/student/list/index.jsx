@@ -11,6 +11,7 @@ import ProvinceService from 'services/axios/provinceService';
 import './index.scss';
 import { Form, Layout, Tag } from 'antd';
 import { DownCircleOutlined, DownSquareOutlined } from '@ant-design/icons';
+import fileSaver from 'file-saver/dist/FileSaver';
 
 const { Content } = Layout;
 
@@ -77,14 +78,15 @@ const StudentList = () => {
   };
 
   const triggerExportExcelWithApi = () => {
-    console.log('triggerExportExcelWithApi');
-    console.log(excelFilter);
     try {
-      let filename = '';
       StudentService.exportToExcel(excelFilter).then((response) => {
-        response.blob().then((blob) => {
-          console.log(blob);
-        });
+        const dirtyFileName = response.headers['content-disposition'];
+        const regex =
+          /filename[^;=\n]*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/;
+        let fileName = dirtyFileName.match(regex)[3];
+
+        let blob = new Blob([response.data]);
+        fileSaver.saveAs(blob, fileName);
       });
     } catch (ex) {
       console.log('Bilinmeyen Bir Hata Oluştu!');

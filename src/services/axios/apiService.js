@@ -44,7 +44,14 @@ class ApiService {
     });
   };
 
-  post = (url, body) => {
+  post = (url, body, options) => {
+    if (options) {
+      return this.apiGateway(() => {
+        return this.service.post(url, body, {
+          ...options,
+        });
+      });
+    }
     return this.apiGateway(() => {
       return this.service.post(url, body);
     });

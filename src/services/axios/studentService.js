@@ -8,7 +8,13 @@ class StudentService {
     return ApiService.post('api/students/findByFilters', { ...filters });
   }
   exportToExcel(filters) {
-    return ApiService.post('api/students/exportToExcel', { ...filters });
+    return ApiService.post(
+      'api/students/exportToExcel',
+      { ...filters },
+      {
+        responseType: 'blob',
+      }
+    );
   }
   findByStudentId(studentId) {
     return ApiService.get('api/students/findByStudenId?studentId=' + studentId);
