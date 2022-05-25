@@ -50,4 +50,8 @@ export default {
   'export.xlsx.with.react': 'Export XLSX With React',
   'export.csv.with.react': 'Export CSV With React',
   'export.excel.with.api': 'Export CSV With Api',
+  'export.pdf.with.api': 'Export PDF With Api',
+  'are.you.sure_want.delete': 'Are You Sure Want Delete',
+  'are.you.sure.tracking.number.will.deleted':
+    'Are You Sure Tracking Number Will Deleted',
 };

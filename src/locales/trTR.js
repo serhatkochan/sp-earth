@@ -50,4 +50,8 @@ export default {
   'export.xlsx.with.react': 'XLSX Formatında React ile',
   'export.csv.with.react': 'CSV Formatında React ile',
   'export.excel.with.api': 'XLS Formatında Api ile',
+  'export.pdf.with.api': 'PDF Formatında Api ile',
+  'are.you.sure_want.delete': 'Silmek istediğinizden emin misiniz',
+  'are.you.sure.tracking.number.will.deleted':
+    'Takip Numarasının Sileneceğinden Emin misiniz',
 };

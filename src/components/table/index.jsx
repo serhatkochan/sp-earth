@@ -47,14 +47,14 @@ const Table = ({
     confirm({
       title: actions.delete.confirm?.title
         ? actions.delete.confirm.title
-        : t('are_you_sure_want_delete'),
+        : t('are.you.sure_want.delete'),
       icon: <WarningOutlined />,
       content: actions.delete.confirm?.content.text,
-      okText: t('yess'),
+      okText: t('Yes'),
       okButtonProps: {
         className: 'button btn-danger small',
       },
-      cancelText: t('cancell'),
+      cancelText: t('Cancel'),
       cancelButtonProps: {
         className: 'button btn-primary small',
       },

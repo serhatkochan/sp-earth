@@ -246,7 +246,7 @@ const StudentList = () => {
         },
         confirm: {
           content: {
-            text: 'are_you_sure_tracking_number_will_deleted',
+            text: t('are.you.sure.tracking.number.will.deleted'),
           },
           dataKey: 'studentNo',
         },
